@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>21天恢復喜樂之旅 /恰克•D•皮爾斯 Chuck D. Pierce</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        body {
+            font-family: 'Microsoft JhengHei', Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-image: url('/api/placeholder/800/1200');
+            background-size: cover;
+            background-attachment: fixed;
+            color: #333;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #4a4a4a;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        .bible-link {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .bible-link a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #1a73e8;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 25px;
+            transition: background-color 0.3s;
+        }
+        .bible-link a:hover {
+            background-color: #155db1;
+        }
+        .day-button {
+            display: inline-block;
+            margin: 5px;
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1em;
+        }
+        .day-button:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+        #content {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+        #content h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>21天恢復喜樂之旅<br>恰克•皮爾斯 Chuck D. Pierce</h1>
+        <div class="bible-link">
+            <a href="https://bible.fhl.net/index.html" target="_blank">點擊這裡查閱聖經經文</a>
+        </div>
+        <div id="buttons"></div>
+        <div id="content"></div>
+    </div>
+
+    <script>
+        const journeyData = {
+            1: "閱讀尼希米記8章。宣告主的喜樂將在接下來的21天成為你的力量！讓主的靈帶領你進行慶祝。這將是一個血統解放、成癮破碎、靈裡變化、恩典與寬恕的時期！",
+            2: "閱讀詩篇4, 5, 51, 35篇。讓主的喜樂充滿你。讚美祂，因祂是你的源頭和喜樂的對象。喜樂包括快樂、滿足和愉快。喜樂應該是神聖且純潔的。這種喜樂超越環境。",
+            3: "閱讀西番雅書3章。聽祂為你歡喜。接受祂的愛。讓祂將恩典和憐憫傾注在你身上。",
+            4: "閱讀路加福音1-2章。歡喜吧！求主將你從悲傷或創傷中釋放。感謝祂來解救你脫離敵人設計的任何牢籠。",
+            5: "閱讀馬太福音13章。求主揭示生活的真正喜樂給你。",
+            6: "閱讀使徒行傳3章。求主移除任何束縛你完成祂目的的病痛之靈。祂正來到美門。",
+            7: "閱讀約翰福音2章，路加福音10章，馬可福音2章。歡喜吧！拍手。願意進入充滿喜樂的境界。不要在婚宴進行到一半時停止參與。求聖靈移除所有剝奪你喜樂的宗教儀式。打破任何法利賽主義的力量。感謝神的新酒。",
+            8: "閱讀路加福音1:14和44節，使徒行傳2:46，猶大書24節，希伯來書1:9，馬太福音5:12，哈巴谷書3:18，哥林多後書7:13。所有這些經文將把你連接到喜樂中。背誦兩節經文。站起來轉圈。向主表達你對祂的愛。",
+            9: "閱讀以賽亞書9章和11章。感謝神的政府變遷。感謝祂並歡喜變革的來臨。感謝祂你的領土將歡呼。閱讀約珥書2章和3章。",
+            10: "閱讀詩篇16篇。宣告神旨意的豐滿將超越你。",
+            11: "閱讀啟示錄1-5章，和12章。接受力量穿過已經設立在你面前的開門。宣告弟兄的控告者被綁住。接受能力、財富和恩惠。",
+            12: "閱讀詩篇130篇和啟示錄2:10。讚美神，因祂除去你的過去，並延伸豐富的恩典和寬恕給你。站在祂的面前，接受祂恩典的澆灌。讓希望重新升起。讓救贖的確據安息在你身上，並命令所有的恐懼離開。",
+            13: "閱讀詩篇131-134篇。讚美神，讓完美的平安在你裡面顯現。停止掙扎，不再依靠你自己的理解來看待你的情況，讓信任升起。擁抱神的忠誠之愛。像斷奶的孩子依偎在母親的胸懷，宣告你的靈魂是斷奶的孩子在你裡面。斷奶的孩子達到了一個新的成熟境界。只有當所有的敵人都在我們腳下，我們才會有平安。超越你的敵人，達到寶座的目標。在主的面前歌唱、讚美和敬拜。接受新的恩膏，就像倒在亞倫頭上的油，流到他袍子的下擺。",
+            14: "閱讀約書亞記5章和6章。讚美神！求主賜予敬拜的策略，以推翻你生命中不可戰勝的事物，讓你能向前邁進應許。",
+            15: "閱讀啟示錄4:11；5:9-10讚美確保我們的未來並帶我們進入安息。當神向我們揭示祂自己時，讚美應該是我們對神的回應。因此，讚美應該在啟示之時發生，而不僅僅是在應許實現時。",
+            16: "閱讀羅馬書8:28-30我們的主權神，他為我們的最終利益安排一切",
+            17: "閱讀腓立比書4章。感謝神，因祂使你的心思意念與祂對齊，並使你思考祂的思想。重整你的思想。宣告你將抓住每一個與神的判斷相悖的念頭。",
+            18: "閱讀使徒行傳16:16-34。讚美神，觀察你的監獄之門如何敞開。觀察救恩臨到那些被囚禁的人。",
+            19: "閱讀詩篇9篇。願意向他人宣告主如何觸摸和顯現給你。打破不安全感，進入大膽之中。",
+            20: "閱讀以賽亞書12章和民數記21:10-18。讚美打開你救恩的井。讚美是乾涸的解藥。接受更新的靈！",
+            21: "閱讀耶利米書42:7：「十天過後，耶和華的話臨到耶利米。」宣告新的啟示、策略和未來的計劃正從寶座釋放出來。提前讚美神，為這些顯現感恩。"
+        };
+
+        $(document).ready(function() {
+            for (let i = 1; i <= 21; i++) {
+                $('#buttons').append(`<button class="day-button" data-day="${i}">第${i}天</button>`);
+            }
+
+            $('.day-button').click(function() {
+                const day = $(this).data('day');
+                $('#content').html(`<h2>第${day}天</h2><p>${journeyData[day]}</p>`);
+                $('.day-button').css('background-color', '#4CAF50');
+                $(this).css('background-color', '#3498db');
+            });
+        });
+    </script>
+</body>
+</html>
